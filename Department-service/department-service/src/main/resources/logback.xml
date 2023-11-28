@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %c{1} %M  %L [%p] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>../logs/gbs-ultra-dl.log</file>
+
+        <!--<file>D:/logs/middleware/middleware-web.log</file>-->
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>../logs/gbs-ultra-dl%i.log</fileNamePattern>
+
+<!--            <fileNamePattern>D:/logs/middleware/middleware-web.%i.log</fileNamePattern>-->
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+        <!-- append>true</append-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %c{1} %M  %L [%p] %m%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Default logging level -->
+    <root level="INFO">
+        <!--<root level="ERROR">-->
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="FILE" />
+    </root>
+
+    <!-- Default middleware logging level prod-->
+    <!--<logger name="com.abipb" level="ERROR"/>-->
+
+    <logger name="com.abipb" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework.security" level="ERROR" />
+    <logger name="org.springframework.boot" level="ERROR" />
+
+    <!--<logger name="org.glassfish.jersey" level="DEBUG" />-->
+    <!-- Logging levels for non-middleware components -->
+    <!--<logger name="org.apache.http.impl.client.DefaultHttpClient" level="ERROR"/>-->
+    <!--<logger name="org" level="ERROR"/>-->
+
+
+    <!-- performance logging - level INFO. Comment out the following line to align it with the root logger or set to ERROR to turn it off-->
+    <!--<logger name="org.perf4j.TimingLogger" level="ERROR"/>-->
+</configuration>
